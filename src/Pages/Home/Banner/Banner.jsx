@@ -1,4 +1,10 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
+
 const Banner = () => {
+
+
     return (
         <div>
             <div className="carousel w-full mt-8 rounded-xl md:rounded-tl-[200px] md:rounded-br-[200px]">
@@ -53,6 +59,59 @@ const Banner = () => {
                 <a href="#item3" className="btn btn-xs">3</a>
                 <a href="#item4" className="btn btn-xs">4</a>
             </div>
+
+            <Swiper
+                spaceBetween={50}
+                slidesPerView={1}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+            >
+                <SwiperSlide className="w-full bg-[url('https://lirp.cdn-website.com/bf4fe880/dms3rep/multi/opt/luxury+real+estate+-+Ranger+Ridge-1920w.jpeg')] bg-center py-[100px] md:py-[200px]">
+                    <div className="flex items-center max-w-[620px] mx-auto">
+                        <div>
+                            <h1 className="md:text-8xl text-5xl font-bold bg-[#00000061] text-white text-center">Be our Guest</h1>
+                            <p className="text-xl bg-white text-center uppercase">LIVE like a king in our best houses</p>
+                            <div className="text-center mt-8">
+                                <button className="uppercase bg-white btn btn-wide">Explore Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide className="w-full bg-[url('https://www.tomferry.com/wp-content/uploads/2023/05/052523-Blog-Header.jpg')] bg-center py-[100px] md:py-[200px] bg-no-repeat">
+                    <div className="flex items-center max-w-[620px] mx-auto">
+                        <div>
+                            <h1 className="md:text-8xl text-5xl font-bold bg-[#00000061] text-white text-center">be our guest</h1>
+                            <p className="text-xl bg-white text-center uppercase">LIVE like a king in our best houses</p>
+                            <div className="text-center mt-8">
+                                <button className="uppercase bg-white btn btn-wide">Explore Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide className="w-full bg-[url('https://www.bankrate.com/2022/09/01101108/luxury-real-estate-157375176.jpg')] bg-center py-[100px] md:py-[200px] bg-no-repeat">
+                    <div className="flex items-center max-w-[620px] mx-auto">
+                        <div>
+                            <h1 className="md:text-8xl text-5xl font-bold bg-[#00000061] text-white text-center">Find out The Best Deals From US</h1>
+                            <p className="text-xl bg-white text-center uppercase">LIVE like a king in our best houses</p>
+                            <div className="text-center mt-8">
+                                <button className="uppercase bg-white btn btn-wide">Explore Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide className="w-full bg-[url('https://mbluxury1.s3.amazonaws.com/2024/02/01151752/luxury-real-estate-website-design-scaled.jpg')] bg-center py-[100px] md:py-[200px] bg-no-repeat">
+                    <div className="flex items-center max-w-[620px] mx-auto">
+                        <div>
+                            <h1 className="md:text-8xl text-5xl font-bold bg-[#00000061] text-white text-center">Explore Luxurious Hotels</h1>
+                            <p className="text-xl bg-white text-center uppercase">LIVE like a king in our best houses</p>
+                            <div className="text-center mt-8">
+                                <button className="uppercase bg-white btn btn-wide">Explore Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </SwiperSlide>
+                ...
+            </Swiper>
         </div>
     );
 };
