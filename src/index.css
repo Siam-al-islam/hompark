@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    padding: 0 10px 0 10px;
+}
+
 .active {
     color: black !important;
     background-color: white !important;
