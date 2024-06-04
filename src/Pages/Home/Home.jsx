@@ -4,7 +4,7 @@ import StateContainer from "./StateContainer/StateContainer";
 
 const Home = () => {
     return (
-        <div className="mt-8">
+        <div>
             <Navbar />
             <Banner />
             <StateContainer />
