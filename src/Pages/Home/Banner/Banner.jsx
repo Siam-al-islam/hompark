@@ -1,7 +1,7 @@
 const Banner = () => {
     return (
         <div>
-            <div className="carousel w-full mt-8 rounded-tl-[200px] rounded-br-[200px]">
+            <div className="carousel w-full mt-8 rounded-xl md:rounded-tl-[200px] md:rounded-br-[200px]">
                 <div id="item1" className="carousel-item w-full bg-[url('https://lirp.cdn-website.com/bf4fe880/dms3rep/multi/opt/luxury+real+estate+-+Ranger+Ridge-1920w.jpeg')] bg-center py-[100px] md:py-[200px]">
                     <div className="flex items-center max-w-[620px] mx-auto">
                         <div>

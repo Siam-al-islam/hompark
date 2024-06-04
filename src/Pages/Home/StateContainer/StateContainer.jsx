@@ -17,13 +17,16 @@ const StateContainer = () => {
                 <p className="mt-4">Discover the Top Pick Villas featuring exquisite design, luxurious amenities, and stunning locations for an unparalleled living experience.
                 </p>
             </div>
-            <div className="grid grid-cols-3 gap-6 mt-8">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-8">
                 {
                     estateData.map(estate => <SingleStateCard
                         key={estate.id}
                         estate={estate}
                     />)
                 }
+            </div>
+            <div className="text-center mt-10">
+                <button className="btn btn-wide btn-outlin border bg-white border-blue-600 text-blue-600">View More</button>
             </div>
         </div>
     );
