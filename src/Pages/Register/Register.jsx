@@ -2,11 +2,14 @@ import { Link } from "react-router-dom";
 import Navbar from "../Home/Shared/Navbar";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthPorvider";
-import { FaRegEye } from "react-icons/fa";
+import { FaGithub, FaGoogle, FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [registerError, setRegisterError] = useState('');
 
     const { createUser } = useContext(AuthContext);
 
@@ -18,13 +21,23 @@ const Register = () => {
         const photoUrl = form.get('url');
         const password = form.get('password');
 
+        if (password.length < 6) {
+            setRegisterError("Password should be at least 6 characters");
+            return;
+        }
+
         // creating user
         createUser(email, password)
             .then(result => {
+                toast.success("Account Created Successfully", {
+                    position: "top-center"
+                })
+                setRegisterError("")
                 console.log(result)
             })
             .catch(error => {
                 console.error(error);
+                setRegisterError(error.message);
             })
     }
 
@@ -32,12 +45,12 @@ const Register = () => {
     return (
         <div>
             <Navbar />
-            <div className="hero mt-14">
-                <div className="hero-content w-full flex-col">
-                    <div className="text-center">
-                        <h1 className="text-4xl font-semibold">Create an Account</h1>
-                    </div>
-                    <div className="card w-full max-w-lg shadow-2xl bg-base-100 mt-6">
+            <div className="hero mt-8">
+                <div className="hero-content w-full md:flex-row flex-col gap-8">
+                    <div className="card w-full max-w-lg shadow-2xl bg-base-100">
+                        <div className="text-center mb-4 mt-3 bg-gray-500 text-white py-4">
+                            <h1 className="text-4xl font-semibold">Create an Account</h1>
+                        </div>
                         <form onSubmit={handleRegister} className="card-body">
                             <div className="form-control">
                                 <label className="label">
@@ -79,9 +92,24 @@ const Register = () => {
                                 <button className="btn btn-primary">Register</button>
                             </div>
                             <div className="mt-6 text-center">
+                                {
+                                    registerError && <p className="text-red-600">{registerError}</p>
+                                }
                                 <h2>Already have an account? <Link to="/login" className="font-bold text-blue-700">Login Now</Link></h2>
                             </div>
+                            <ToastContainer />
                         </form>
+                    </div>
+                    <div>
+                        <h3 className="text-2xl font-semibold">Or Create account with</h3>
+                        <button className="btn btn-outline w-full mt-6">
+                            <FaGoogle />
+                            Create with Google
+                        </button>
+                        <button className="btn btn-outline w-full mt-3">
+                            <FaGithub />
+                            Create with GitHub
+                        </button>
                     </div>
                 </div>
             </div>
