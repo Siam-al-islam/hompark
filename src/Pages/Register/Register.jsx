@@ -33,7 +33,7 @@ const Register = () => {
                     position: "top-center"
                 })
                 setRegisterError("")
-                console.log(result)
+                console.log(result.user)
             })
             .catch(error => {
                 console.error(error);

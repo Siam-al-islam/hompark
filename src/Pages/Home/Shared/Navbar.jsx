@@ -1,6 +1,17 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthPorvider";
 
 const Navbar = () => {
+
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        logOut()
+            .then()
+            .catch()
+    }
+
     const navLinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/about">About</NavLink></li>
@@ -27,8 +38,20 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end gap-2">
-                <Link to="/register"><button className="px-6 py-2 rounded-lg bg-blue-500 hover:bg-white hover:text-blue-500 border border-blue-500 text-white font-semibold hidden md:block">Register</button></Link>
-                <Link to="/login"><button className="px-6 py-2 rounded-lg bg-green-500 hover:bg-white hover:text-green-500 border border-green-500 text-white font-semibold">Login</button></Link>
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                    <div className="w-10 rounded-full">
+                        <img alt="Tailwind CSS Navbar component" src="https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg" />
+                    </div>
+                </div>
+                {
+                    user ?
+                        <button onClick={handleSignOut} className="btn btn-error text-white">Log Out</button>
+                        :
+                        <div className="flex gap-2">
+                            <Link to="/register"><button className="px-6 py-2 rounded-lg bg-blue-500 hover:bg-white hover:text-blue-500 border border-blue-500 text-white font-semibold hidden md:block">Register</button></Link>
+                            <Link to="/login"><button className="px-6 py-2 rounded-lg bg-green-500 hover:bg-white hover:text-green-500 border border-green-500 text-white font-semibold">Login</button></Link>
+                        </div>
+                }
             </div>
         </div>
     );
