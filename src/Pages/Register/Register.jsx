@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../Home/Shared/Navbar";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthPorvider";
-import { FaGithub, FaGoogle, FaRegEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
+import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -12,6 +11,8 @@ const Register = () => {
     const [registerError, setRegisterError] = useState('');
 
     const { createUser } = useContext(AuthContext);
+    // const { createUserByGoogle, createUserByGithub } = useContext(AuthContext);
+    // const { createUserByGithub } = useContext(AuthContext);
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -23,6 +24,14 @@ const Register = () => {
 
         if (password.length < 6) {
             setRegisterError("Password should be at least 6 characters");
+            return;
+        }
+        else if (!/[A-Z]/.test(password)) {
+            setRegisterError("Your Password should have at least one upper case characters");
+            return;
+        }
+        else if (!/[a-z]/.test(password)) {
+            setRegisterError("Your Password should have at least one lowecase case characters");
             return;
         }
 
@@ -40,6 +49,8 @@ const Register = () => {
                 setRegisterError(error.message);
             })
     }
+
+
 
 
     return (
@@ -99,17 +110,6 @@ const Register = () => {
                             </div>
                             <ToastContainer />
                         </form>
-                    </div>
-                    <div>
-                        <h3 className="text-2xl font-semibold">Or Create account with</h3>
-                        <button className="btn btn-outline w-full mt-6">
-                            <FaGoogle />
-                            Create with Google
-                        </button>
-                        <button className="btn btn-outline w-full mt-3">
-                            <FaGithub />
-                            Create with GitHub
-                        </button>
                     </div>
                 </div>
             </div>

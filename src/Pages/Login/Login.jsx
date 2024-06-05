@@ -7,7 +7,7 @@ import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const Login = () => {
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, createUserByGoogle, createUserByGithub } = useContext(AuthContext);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -25,6 +25,20 @@ const Login = () => {
                 toast.error("Wrong password or email", { position: "top-center" })
                 console.error(error)
             })
+    }
+
+    const handleGoogleSignIn = () => {
+        createUserByGoogle();
+        toast.success("Logged In successfully", {
+            position: "top-center"
+        })
+    }
+
+    const handleGithubSignIn = () => {
+        createUserByGithub();
+        toast.success("Logged In Successfully", {
+            position: "top-center"
+        })
     }
 
     return (
@@ -60,13 +74,13 @@ const Login = () => {
                     </div>
                     <div>
                         <h3 className="text-2xl font-semibold">Or Login with</h3>
-                        <button className="btn btn-outline w-full mt-6">
+                        <button onClick={handleGoogleSignIn} className="btn btn-outline w-full mt-6">
                             <FaGoogle />
-                            Create with Google
+                            Login with Google
                         </button>
-                        <button className="btn btn-outline w-full mt-3">
+                        <button onClick={handleGithubSignIn} className="btn btn-outline w-full mt-3">
                             <FaGithub />
-                            Create with GitHub
+                            Login with GitHub
                         </button>
                     </div>
                 </div>
