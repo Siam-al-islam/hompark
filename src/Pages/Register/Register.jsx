@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Home/Shared/Navbar";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthPorvider";
@@ -10,9 +10,10 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [registerError, setRegisterError] = useState('');
 
+    const location = useLocation();
+    const navigate = useNavigate();
+
     const { createUser } = useContext(AuthContext);
-    // const { createUserByGoogle, createUserByGithub } = useContext(AuthContext);
-    // const { createUserByGithub } = useContext(AuthContext);
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -38,20 +39,18 @@ const Register = () => {
         // creating user
         createUser(email, password)
             .then(result => {
+                navigate(location?.state ? location.state : "/");
                 toast.success("Account Created Successfully", {
                     position: "top-center"
                 })
-                setRegisterError("")
                 console.log(result.user)
+                setRegisterError("");
             })
             .catch(error => {
                 console.error(error);
                 setRegisterError(error.message);
             })
     }
-
-
-
 
     return (
         <div>

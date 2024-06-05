@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Home/Shared/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthPorvider";
@@ -9,6 +9,10 @@ const Login = () => {
 
     const { signIn, createUserByGoogle, createUserByGithub } = useContext(AuthContext);
 
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location.state)
+
     const handleLogin = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
@@ -18,6 +22,7 @@ const Login = () => {
         // sign in user 
         signIn(email, password)
             .then(result => {
+                navigate(location?.state ? location.state : "/");
                 toast.success("Successfully logged In", { position: "top-center" })
                 console.log(result);
             })
@@ -28,6 +33,7 @@ const Login = () => {
     }
 
     const handleGoogleSignIn = () => {
+        navigate(location?.state ? location.state : "/");
         createUserByGoogle();
         toast.success("Logged In successfully", {
             position: "top-center"
@@ -35,6 +41,7 @@ const Login = () => {
     }
 
     const handleGithubSignIn = () => {
+        navigate(location?.state ? location.state : "/");
         createUserByGithub();
         toast.success("Logged In Successfully", {
             position: "top-center"
