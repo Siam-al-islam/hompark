@@ -7,6 +7,7 @@ import Login from '../Pages/Login/Login';
 import EstateDetails from '../Pages/EstateDetails/EstateDetails';
 import PrivateRoute from '../Provider/PrivateRoute';
 import About from '../Pages/About/About';
+import ContactUs from '../Pages/ContactUs/ContactUs';
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: "/about",
                 element: <About />
+            },
+            {
+                path: "/contact",
+                element: <ContactUs />
             },
             {
                 path: "/details/:id",

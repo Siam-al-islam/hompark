@@ -4,7 +4,7 @@ import app from "../Firebase/firebase.config";
 
 export const AuthContext = createContext(null);
 
-const auth = getAuth(app)
+const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -16,7 +16,6 @@ const AuthProvider = ({ children }) => {
     const createUserByGoogle = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
-                console.log(result.user);
                 const googleSignInUser = result.user;
                 setUser(googleSignInUser)
             })
@@ -28,7 +27,6 @@ const AuthProvider = ({ children }) => {
     const createUserByGithub = () => {
         signInWithPopup(auth, githubProvider)
             .then(result => {
-                console.log(result.user);
                 const githubSignInUser = result.user;
                 setUser(githubSignInUser)
             })

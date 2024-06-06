@@ -31,10 +31,6 @@ const Login = () => {
     }
 
     const handleGoogleSignIn = () => {
-        if (location.state) {
-            navigate(location.state)
-        }
-        // navigate(location?.state ? location.state : "/");
         createUserByGoogle();
         toast.success("Logged In successfully", {
             position: "top-center"
@@ -42,7 +38,7 @@ const Login = () => {
     }
 
     const handleGithubSignIn = () => {
-        navigate(location?.state);
+        navigate(location?.state ? location.state : "/");
         createUserByGithub();
         toast.success("Logged In Successfully", {
             position: "top-center"
