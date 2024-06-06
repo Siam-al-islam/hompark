@@ -6,6 +6,7 @@ import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [registerError, setRegisterError] = useState('');
@@ -13,14 +14,14 @@ const Register = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, loading } = useContext(AuthContext);
 
     const handleRegister = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
         const name = form.get('name');
         const email = form.get('email');
-        const photoUrl = form.get('url');
+        const photoURL = form.get('url');
         const password = form.get('password');
 
         if (password.length < 6) {
@@ -99,7 +100,10 @@ const Register = () => {
                                 </div>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">Register</button>
+                                {
+                                    loading ? <div className="flex justify-center"><span className="loading loading-spinner loading-lg"></span></div> : <button className="btn btn-primary">Register</button>
+
+                                }
                             </div>
                             <div className="mt-6 text-center">
                                 {

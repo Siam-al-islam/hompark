@@ -44,11 +44,12 @@ const AuthProvider = ({ children }) => {
 
     const signIn = (email, password) => {
         setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password)
+        return signInWithEmailAndPassword(auth, email, password);
     };
 
     const logOut = () => {
         setLoading(true);
+        setUser(null);
         return signOut(auth);
     };
 
@@ -61,8 +62,8 @@ const AuthProvider = ({ children }) => {
         return () => {
             unSubscribe();
         }
-
     }, [])
+
 
     const authInfo = {
         user,

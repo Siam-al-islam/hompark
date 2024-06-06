@@ -11,7 +11,6 @@ const Login = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location.state)
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -21,10 +20,9 @@ const Login = () => {
 
         // sign in user 
         signIn(email, password)
-            .then(result => {
+            .then(() => {
                 navigate(location?.state ? location.state : "/");
                 toast.success("Successfully logged In", { position: "top-center" })
-                console.log(result);
             })
             .catch(error => {
                 toast.error("Wrong password or email", { position: "top-center" })
@@ -33,7 +31,10 @@ const Login = () => {
     }
 
     const handleGoogleSignIn = () => {
-        navigate(location?.state ? location.state : "/");
+        if (location.state) {
+            navigate(location.state)
+        }
+        // navigate(location?.state ? location.state : "/");
         createUserByGoogle();
         toast.success("Logged In successfully", {
             position: "top-center"
@@ -41,7 +42,7 @@ const Login = () => {
     }
 
     const handleGithubSignIn = () => {
-        navigate(location?.state ? location.state : "/");
+        navigate(location?.state);
         createUserByGithub();
         toast.success("Logged In Successfully", {
             position: "top-center"

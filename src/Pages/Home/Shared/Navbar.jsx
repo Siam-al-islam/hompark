@@ -5,12 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 
 const Navbar = () => {
 
-    const { user, logOut } = useContext(AuthContext);
+    const { user, loading, logOut } = useContext(AuthContext);
 
     const handleSignOut = () => {
         logOut()
-            .then(result => {
-                console.log(result);
+            .then(() => {
                 toast.success("Logged Out successfully", {
                     position: "top-center"
                 })
@@ -21,7 +20,6 @@ const Navbar = () => {
     const navLinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/about">About</NavLink></li>
-        <li><NavLink to="/facilities">Facilities</NavLink></li>
         <li><NavLink to="/contact">Contact Us</NavLink></li>
     </>
 
@@ -44,20 +42,25 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end gap-2">
+                <div className="hidden md:block">
+                    {user && user?.displayName}
+                </div>
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
-                        <img alt="Tailwind CSS Navbar component" src="https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg" />
+                        <img alt={user?.displayName} src={user ? user.photoURL : "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"} />
                     </div>
                 </div>
-                {
-                    user ?
-                        <button onClick={handleSignOut} className="btn btn-error text-white">Log Out</button>
-                        :
-                        <div className="flex gap-2">
-                            <Link to="/register"><button className="px-6 py-2 rounded-lg bg-blue-500 hover:bg-white hover:text-blue-500 border border-blue-500 text-white font-semibold hidden md:block">Register</button></Link>
-                            <Link to="/login"><button className="px-6 py-2 rounded-lg bg-green-500 hover:bg-white hover:text-green-500 border border-green-500 text-white font-semibold">Login</button></Link>
-                        </div>
-                }
+                {loading ? <span className="loading loading-spinner loading-lg"></span> : <div>
+                    {
+                        user ?
+                            <button onClick={handleSignOut} className="btn btn-error text-white">Log Out</button>
+                            :
+                            <div className="flex gap-2">
+                                <Link to="/register"><button className="px-6 py-2 rounded-lg bg-blue-500 hover:bg-white hover:text-blue-500 border border-blue-500 text-white font-semibold hidden md:block">Register</button></Link>
+                                <Link to="/login"><button className="px-6 py-2 rounded-lg bg-green-500 hover:bg-white hover:text-green-500 border border-green-500 text-white font-semibold">Login</button></Link>
+                            </div>
+                    }
+                </div>}
             </div>
             <ToastContainer />
         </div>
